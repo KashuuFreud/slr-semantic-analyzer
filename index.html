@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab 5 Semantic Analyzer</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Compiler Design Lab 5</p>
+        <h1>SLR-Guided Semantic Analyzer</h1>
+        <p class="subtitle">AST construction, scoped symbol table, type checking, semantic action trace, and a lightweight IR preview for the next compiler stage.</p>
+      </div>
+      <div class="hero-badge"><span>Semantic</span><strong>AST + Scope + Type</strong></div>
+    </section>
+
+    <section class="workflow">
+      <div class="workflow-item active">1. Source Code</div><div class="workflow-arrow">→</div>
+      <div class="workflow-item active">2. Token Stream</div><div class="workflow-arrow">→</div>
+      <div class="workflow-item active">3. Semantic Actions</div><div class="workflow-arrow">→</div>
+      <div class="workflow-item active">4. AST</div><div class="workflow-arrow">→</div>
+      <div class="workflow-item active">5. Symbol Table / Errors / IR</div>
+    </section>
+
+    <section class="panel two-column">
+      <div class="card editor-card">
+        <div class="card-header"><h2>Source Code</h2><span class="tag">C-like subset</span></div>
+        <textarea id="sourceInput" spellcheck="false"></textarea>
+        <div class="actions">
+          <button id="loadExampleBtn" class="ghost-btn">Load Example</button>
+          <button id="loadScopeBtn" class="ghost-btn">Load Scope Case</button>
+          <button id="loadErrorBtn" class="ghost-btn">Load Error Case</button>
+          <button id="runBtn" class="primary-btn">Run Semantic Analysis</button>
+          <button id="clearBtn" class="ghost-btn">Clear</button>
+        </div>
+      </div>
+      <div class="card result-card">
+        <div class="card-header"><h2>Token Stream</h2><span id="tokenCount" class="tag">0 tokens</span></div>
+        <div id="tokenList" class="token-list empty">No tokens generated yet.</div>
+      </div>
+    </section>
+
+    <section class="dashboard">
+      <div class="metric-card"><strong id="metricAst">0</strong><span>AST Nodes</span></div>
+      <div class="metric-card"><strong id="metricScope">0</strong><span>Scopes</span></div>
+      <div class="metric-card"><strong id="metricSymbol">0</strong><span>Symbols</span></div>
+      <div class="metric-card"><strong id="metricError">0</strong><span>Errors</span></div>
+      <div class="metric-card"><strong id="metricWarning">0</strong><span>Warnings</span></div>
+    </section>
+
+    <section class="panel two-column">
+      <div class="card tall-card"><div class="card-header"><h2>Semantic Action Trace</h2><span class="tag">Reduce-time attributes</span></div><div id="traceList" class="trace-list empty">Run semantic analysis first.</div></div>
+      <div class="card tall-card"><div class="card-header"><h2>Abstract Syntax Tree</h2><span class="tag">AST</span></div><div id="astView" class="tree-view empty">Run semantic analysis first.</div></div>
+    </section>
+
+    <section class="panel two-column">
+      <div class="card tall-card"><div class="card-header"><h2>Scoped Symbol Table</h2><span class="tag">Name / Type / Scope / Addr</span></div><div id="symbolTable" class="table-wrap empty">Run semantic analysis first.</div></div>
+      <div class="card tall-card"><div class="card-header"><h2>Scope Tree</h2><span class="tag">Nested blocks</span></div><div id="scopeTree" class="tree-view empty">Run semantic analysis first.</div></div>
+    </section>
+
+    <section class="panel two-column">
+      <div class="card tall-card"><div class="card-header"><h2>Semantic Errors & Warnings</h2><span id="errorStatus" class="tag">Waiting</span></div><div id="errorList" class="error-list empty">Run semantic analysis first.</div></div>
+      <div class="card tall-card"><div class="card-header"><h2>Three-Address Code Preview</h2><span class="tag">Lab 6 extension</span></div><div id="irList" class="ir-list empty">Run semantic analysis first.</div></div>
+    </section>
+  </main>
+  <script src="./semantic.js"></script>
+</body>
+</html>
